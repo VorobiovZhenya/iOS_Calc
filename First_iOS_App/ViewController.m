@@ -7,6 +7,13 @@
 //
 
 #import "ViewController.h"
+enum
+{   PLUS = 10,
+    MINUS = 11,
+    MULTI = 12,
+    DIV = 13,
+    EQUAL = 14
+};
 
 @implementation ViewController
 
@@ -16,14 +23,28 @@
     
     [super viewDidLoad];
     [self test];
-    operand = [[NSString alloc] init];
-    dotStatus = NO;
+    [self reset];
     
 }
+
+-(void)reset
+{
+    operationTag = 0;
+    dotStatus = NO;
+    equalStatus = NO;
+    operand = @"";
+    displayLabel.text = @"0";
+    x = 0;
+    y = 0;
+}
+
 -(IBAction)digits:(id)sender
 {
     
     NSLog(@"%li", [sender tag]);
+    if (equalStatus) {
+        [self reset];
+    }
     operand = [NSString stringWithFormat:@"%@%li", operand,[sender tag]];
     displayLabel.text = operand;
 }
@@ -32,11 +53,18 @@
 {
     
     NSLog(@"dot");
+   
+    if (equalStatus) {
+        [self reset];
+    }
     if (!dotStatus)
     {
-      operand = [NSString stringWithFormat:@"%@%@", operand,@"."];
+        if ([operand isEqual:@""]) {
+            operand = [NSString stringWithFormat:@"%@",@"0."];
+        } else{
+            operand = [NSString stringWithFormat:@"%@%@", operand,@"."];
+        }
     }
-    
     dotStatus = YES;
     displayLabel.text = operand;
 }
@@ -44,44 +72,53 @@
 -(IBAction)operations:(id)sender
 {
     NSLog(@"operations");
-    
-        x = [operand doubleValue];
-        switch (operationTag)
-            {
-            case 10:
-                x =y+x;
-                break;
-            case 11:
-                x =y-x;
-                break;
-            case 12:
-                x =y*x;
-                break;
-            case 13:
-                x =y/x;
-                break;
-        
-            default:
-                break;
-            }
-        y = x;
-        displayLabel.text = [NSString stringWithFormat:@"%f",x];
-    
-    if ([sender tag] != 14) {
+    if ([operand isEqual:@""]) {
         operationTag = [sender tag];
+    } else
+    {
+        if (equalStatus && ([sender tag] != EQUAL))
+        {
+            equalStatus = NO;
+        } else
+            {
+            x = [operand doubleValue];
+            switch (operationTag)
+            {
+                case PLUS:
+                    y =y+x;
+                    break;
+                case MINUS:
+                    y =y-x;
+                    break;
+                case MULTI:
+                    y =y*x;
+                    break;
+                case DIV:
+                    y =y/x;
+                    break;
+                    
+                default:
+                    y = x;
+                    break;
+            }
+        }
+        if ([sender tag] != EQUAL)
+        {
+            operationTag = [sender tag];
+            operand = @"";
+        }else{
+            equalStatus = YES;
+        }
+        displayLabel.text = [NSString stringWithFormat:@"%g",y];
+        dotStatus = NO;
     }
-    operand = @"";
-    dotStatus = NO;
 }
 
 -(IBAction)clearAll:(id)sender
 {
     NSLog(@"clearAll");
-    dotStatus = NO;
-    operand = @"";
-    displayLabel.text = @"0";
-    x = 0;
-    y = 0;
+    [self reset];
+    
 }
 
 -(IBAction)inversSign:(id)sender

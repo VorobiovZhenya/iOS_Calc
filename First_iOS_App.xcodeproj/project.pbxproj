@@ -104,8 +104,6 @@
 		EEEA01811C56A40B00F43ECE /* First_iOS_App */ = {
 			isa = PBXGroup;
 			children = (
-				EEF94D181C58112600F7E3FF /* calc.h */,
-				EEF94D191C58112600F7E3FF /* calc.m */,
 				EEEA01851C56A40B00F43ECE /* AppDelegate.h */,
 				EEEA01861C56A40B00F43ECE /* AppDelegate.m */,
 				EEEA01881C56A40B00F43ECE /* ViewController.h */,
@@ -114,6 +112,8 @@
 				EEEA018E1C56A40B00F43ECE /* Assets.xcassets */,
 				EEEA01901C56A40B00F43ECE /* LaunchScreen.storyboard */,
 				EEEA01931C56A40B00F43ECE /* Info.plist */,
+				EEF94D181C58112600F7E3FF /* calc.h */,
+				EEF94D191C58112600F7E3FF /* calc.m */,
 				EEEA01821C56A40B00F43ECE /* Supporting Files */,
 			);
 			path = First_iOS_App;

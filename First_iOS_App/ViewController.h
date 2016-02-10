@@ -12,18 +12,18 @@
 @interface ViewController : UIViewController
 {
     IBOutlet UILabel *displayLabel;
-    NSString * operand;
-    double x,y;
-    BOOL dotStatus;
+    NSString * operand;     //Value from display
+    double x,y;             //Operands
+    BOOL dotStatus,
+         equalStatus;
     long operationTag;
 }
-
+-(void)reset;
 -(IBAction)digits:(id)sender;
 -(IBAction)operations:(id)sender;
 -(IBAction)clearAll:(id)sender;
 -(IBAction)inversSign:(id)sender;
--(IBAction) percent:(id)sender;
-
+-(IBAction)percent:(id)sender;
 
 @end
 
