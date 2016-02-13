@@ -207,6 +207,10 @@
 		EEEA01771C56A40B00F43ECE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					" р",
+					7,
+				);
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = Zhenya;
 				TargetAttributes = {

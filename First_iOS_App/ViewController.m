@@ -53,7 +53,7 @@ enum
 {
     
     NSLog(@"dot");
-   
+    
     if (equalStatus) {
         [self reset];
     }
@@ -80,21 +80,21 @@ enum
         {
             equalStatus = NO;
         } else
-            {
+        {
             x = [operand doubleValue];
             switch (operationTag)
             {
                 case PLUS:
-                    y =y+x;
+                    y = y+x;
                     break;
                 case MINUS:
-                    y =y-x;
+                    y = y-x;
                     break;
                 case MULTI:
-                    y =y*x;
+                    y = y*x;
                     break;
                 case DIV:
-                    y =y/x;
+                    y = y/x;
                     break;
                     
                 default:
@@ -114,21 +114,28 @@ enum
     }
 }
 
+-(IBAction)percent:(id)sender
+{
+    operand = [NSString stringWithFormat:@"%g",([operand doubleValue]/100*y)];
+    displayLabel.text = operand;
+}
+
 -(IBAction)clearAll:(id)sender
 {
     NSLog(@"clearAll");
     [self reset];
-    
 }
 
 -(IBAction)inversSign:(id)sender
 {
-  NSLog(@"inversSign");
-}
-
--(IBAction) percent:(id)sender
-{
-    NSLog(@"percent");
+    NSLog(@"inversSign");
+    if ((equalStatus) || [operand isEqual:@""]) {
+        y=-y;
+        displayLabel.text = [NSString stringWithFormat:@"%g",y];
+    }else{
+        operand = [NSString stringWithFormat:@"%g",([operand doubleValue]*(-1))];
+        displayLabel.text = operand;
+    }
 }
 
 -(void)test
@@ -146,7 +153,6 @@ enum
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 @end
 
 
